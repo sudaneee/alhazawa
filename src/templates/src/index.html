@@ -1,0 +1,467 @@
+
+{% extends 'src/base.html' %}
+{% load static %}
+{% block content%}
+    
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for i in sliders %}
+                <div class="{% if forloop.counter == 1 %} carousel-item active {% else %} carousel-item {% endif %}">
+                    <img class="w-100" src="{{i.image.url}}" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-7 pt-5">
+                                    <h3 class="display-10 text-white mb-3 animated slideInDown">{{i.title}}</h3>
+                                    <p class="fs-5 text-white-50 mb-5 animated slideInDown">{{i.content}}</p>
+                                    <a class="btn btn-primary py-2 px-3 animated slideInDown" href="">
+                                        Learn More
+                                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+
+            <!-- Welcome Note from the Founder -->
+            <div class="row g-5 align-items-center mb-5">
+                <div class="col-lg-4 wow fadeInLeft" data-wow-delay="0.1s">
+                    <img src="{{ picture.image.url }}" alt="Founder Picture" class="img-fluid rounded shadow">
+                    <h1>Prof. Mansir Dodo</h1>
+                    <h3>Founder</h3>
+                </div>
+                <div class="col-lg-8 wow fadeInRight" data-wow-delay="0.3s">
+                    <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Welcome Note</div>
+                    <h2 class="mb-3">{{ welcome_note.tag }}</h2>
+                    <p style="text-align: justify; white-space: pre-line;">
+                        {{ welcome_note.content }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Appreciation Video Section -->
+            <div class="row g-5 mb-5">
+                <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Founder’s Message</div>
+                    <h2 class="mb-3">{{ appreciation_video.tag }}</h2>
+                    <div class="ratio ratio-16x9 rounded shadow">
+                        <video controls>
+                            <source src="{{ appreciation_video.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Original About Us Section -->
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="position-relative overflow-hidden h-100" style="min-height: 400px;">
+                        <img class="position-absolute w-100 h-100 pt-5 pe-5" src="{{ about.image1.url }}" alt="" style="object-fit: cover;">
+                        <img class="position-absolute top-0 end-0 bg-white ps-2 pb-2" src="{{ about.image2.url }}" alt="" style="width: 200px; height: 200px;">
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="h-100">
+                        <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">About Us</div>
+                        <h1 class="display-6 mb-5">{{ about.title }}</h1>
+                        <p class="mb-5">{{ about.content }}</p>
+                        <a class="btn btn-primary py-2 px-3 me-3" href="">
+                            Learn More
+                            <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <a class="btn btn-outline-primary py-2 px-3" href="">
+                            Contact Us
+                            <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                                <i class="fa fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- About End -->
+
+
+
+
+
+    {% comment %} <!-- Causes Start -->
+    <div class="container-xxl bg-light my-5 py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Feature Causes</div>
+                <h1 class="display-6 mb-5">{{g_info.causeHead}}</h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+                {% for i in causes %}
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="causes-item d-flex flex-column bg-white border-top border-5 border-primary rounded-top overflow-hidden h-100">
+                        <div class="text-center p-4 pt-0">
+                            <div class="d-inline-block bg-primary text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
+                                <small>{{i.tag}}</small>
+                            </div>
+                            <h5 class="mb-3">{{i.title}}</h5>
+                            <p>{{i.content}}</p>
+                            <div class="causes-progress bg-light p-3 pt-2">
+                                <div class="d-flex justify-content-between">
+                                    <p class="text-dark">${{i.goal}} <small class="text-body">Goal</small></p>
+                                    <p class="text-dark">${{i.raised}} <small class="text-body">Raised</small></p>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{i.percentage}}" aria-valuemin="0" aria-valuemax="100">
+                                        <span>{{i.percentage}}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-relative mt-auto">
+                            <img class="img-fluid" src="{{i.image.url}}" alt="">
+                            <div class="causes-overlay">
+                                <a class="btn btn-outline-primary" href="">
+                                    Read More
+                                    <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Causes End --> {% endcomment %}
+
+
+    <!-- Service Start -->
+
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">What We Do</div>
+                <h1 class="display-6 mb-5">{{ g_info.whatHead }}</h1>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="h-100">
+                        <h2 class="text-center mb-4">Long Vacation Lesson</h2>
+                        {% if long_vacation_paragraph %}
+                            <p class="lead text-center">{{ long_vacation_paragraph.content }}</p>
+                        {% endif %}
+
+                        {% if long_vacation_images or long_vacation_videos %}
+                        <div id="vacationCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for img in long_vacation_images %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ img.image.url }}" class="d-block w-100 rounded shadow" alt="{{ img.caption }}">
+                                    </div>
+                                {% endfor %}
+                                {% for vid in long_vacation_videos %}
+                                    <div class="carousel-item {% if forloop.first and not long_vacation_images %}active{% endif %}">
+                                        <video class="d-block w-100 rounded shadow" autoplay muted loop playsinline controls>
+                                            <source src="{{ vid.video.url }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#vacationCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#vacationCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="h-100">
+                        <h2 class="text-center mb-4">Classroom Sessions</h2>
+                        {% if classroom_paragraph %}
+                            <p class="lead text-center">{{ classroom_paragraph.content }}</p>
+                        {% endif %}
+
+                        {% if classroom_images or classroom_videos %}
+                        <div id="classroomCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for img in classroom_images %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ img.image.url }}" class="d-block w-100 rounded shadow" alt="{{ img.caption }}">
+                                    </div>
+                                {% endfor %}
+                                {% for vid in classroom_videos %}
+                                    <div class="carousel-item {% if forloop.first and not classroom_images %}active{% endif %}">
+                                        <video class="d-block w-100 rounded shadow" autoplay muted loop playsinline controls>
+                                            <source src="{{ vid.video.url }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#classroomCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#classroomCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="h-100">
+                        <h2 class="text-center mb-4">Feeding Programme</h2>
+                        {% if feeding_paragraph %}
+                            <p class="lead text-center">{{ feeding_paragraph.content }}</p>
+                        {% endif %}
+
+                        {% if feeding_images or feeding_videos %}
+                        <div id="feedingCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for img in feeding_images %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ img.image.url }}" class="d-block w-100 rounded shadow" alt="{{ img.caption }}">
+                                    </div>
+                                {% endfor %}
+                                {% for vid in feeding_videos %}
+                                    <div class="carousel-item {% if forloop.first and not feeding_images %}active{% endif %}">
+                                        <video class="d-block w-100 rounded shadow" autoplay muted loop playsinline controls>
+                                            <source src="{{ vid.video.url }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#feedingCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#feedingCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            </div>
+    </div>
+
+    <!-- Service End -->
+
+
+    <!-- Team Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Team Members</div>
+                <h1 class="display-6 mb-5">{{g_info.teamHead}}</h1>
+            </div>
+            <div class="row g-4">
+                {% for i in trustee %}
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item position-relative rounded overflow-hidden">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="{{i.image.url}}" alt="">
+                        </div>
+                        <div class="team-text bg-light text-center p-4">
+                            <h5>{{i.name}}</h5>
+                            <p class="text-primary">{{i.designation}}</p>
+                            <div class="team-social text-center">
+                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+
+
+
+
+    <!-- Gallery Start -->
+    <div class="container-xxl bg-light my-5">
+        <div class="photo-gallery">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Our Gallery</h2>
+                    <p class="text-center">
+                        Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae.
+                    </p>
+                </div>
+
+                <!-- Square-Crop Image Styling -->
+                <style>
+                    .photos .item {
+                        overflow: hidden;
+                        height: 250px;
+                        margin-bottom: 20px;
+                        border-radius: 8px;
+                    }
+
+                    .photos .item img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: transform 0.3s ease;
+                    }
+
+                    .photos .item img:hover {
+                        transform: scale(1.05);
+                    }
+                </style>
+
+                <div class="row photos">
+                    {% for i in galleries %}
+                    <div class="col-sm-6 col-md-4 col-lg-3 item">
+                        <a href="{{ i.image.url }}" data-lightbox="photos">
+                            <img class="img-fluid" src="{{ i.image.url }}">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <a class="btn btn-outline-primary px-3" href="">
+                        More
+                        <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gallery End -->
+
+    <!-- Donate Start -->
+    <div class="container-fluid donate my-5 py-5" data-parallax="scroll" data-image-src="{% static 'src/img/carousel-2.jpg' %}">
+        <div class="container py-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Donate Now</div>
+                    <h1 class="display-6 text-white mb-5">{{g_info.donateHead}}</h1>
+                    <p class="text-white-50 mb-0">{{g_info.donateContent}}</p>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="h-100 bg-white p-5">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-light border-0" id="name" placeholder="Your Name">
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-light border-0" id="email" placeholder="Your Email">
+                                        <label for="email">Your Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="btn-group d-flex justify-content-around">
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
+                                        <label class="btn btn-light py-3" for="btnradio1">$10</label>
+
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2">
+                                        <label class="btn btn-light py-3" for="btnradio2">$20</label>
+
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3">
+                                        <label class="btn btn-light py-3" for="btnradio3">$30</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary px-5" style="height: 60px;">
+                                        Donate Now
+                                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Donate End -->
+
+
+
+
+
+    <!-- Testimonial Start --
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Testimonial</div>
+                <h1 class="display-6 mb-5">{{g_info.testimonieHead}}</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                {% for i in testimoinies%}
+                <div class="testimonial-item text-center">
+                    <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="{{i.image.url}}" style="width: 100px; height: 100px;">
+                    <div class="testimonial-text rounded text-center p-4">
+                        <p>{{i.content}}</p>
+                        <h5 class="mb-1">{{i.name}}</h5>
+                        <span class="fst-italic">{{i.profession}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+
+
+
+
+
+{% endblock content%}
