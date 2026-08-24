@@ -13,6 +13,24 @@
   </div>
 </section>
 
+{% if founder %}
+<section class="section section--alt" aria-labelledby="founder-h">
+  <div class="container founder-layout">
+    <div class="founder-media" data-reveal="left">
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      {% if founder.image %}<div class="frame"><img src="{{ founder.image.url }}" alt="{{ founder.name }}" loading="lazy"></div>{% endif %}
+    </div>
+    <div class="founder-copy" data-reveal="right">
+      <span class="role">{{ founder.role_title }}</span>
+      <h2 id="founder-h">{{ founder.name }}</h2>
+      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
+      <p style="margin-top:.8rem;font-size:.95rem;color:var(--text-muted);">The Foundation is headquartered at {{ g_info.address }}.</p>
+      {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <section class="section" aria-labelledby="bg-h">
   <div class="container split">
     <div class="split-media" data-reveal="left">
@@ -71,24 +89,6 @@
     <div class="values-row" data-render="values" data-stagger></div>
   </div>
 </section>
-
-{% if founder %}
-<section class="section" aria-labelledby="founder-h">
-  <div class="container founder-layout">
-    <div class="founder-media" data-reveal="left">
-      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-      {% if founder.image %}<div class="frame"><img src="{{ founder.image.url }}" alt="{{ founder.name }}" loading="lazy"></div>{% endif %}
-    </div>
-    <div class="founder-copy" data-reveal="right">
-      <span class="role">{{ founder.role_title }}</span>
-      <h2 id="founder-h">{{ founder.name }}</h2>
-      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
-      <p style="margin-top:.8rem;font-size:.95rem;color:var(--text-muted);">The Foundation is headquartered at {{ g_info.address }}.</p>
-      {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
-    </div>
-  </div>
-</section>
-{% endif %}
 
 <section class="section section--alt" aria-labelledby="strategy-h">
   <div class="container">

@@ -70,6 +70,25 @@
   </div>
 </div>
 
+<!-- ============================ FOUNDER MESSAGE ============================ -->
+{% if founder %}
+<section class="section section--alt" aria-labelledby="founder-h">
+  <div class="container founder-layout">
+    <div class="founder-media" data-reveal="left">
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      {% if founder.image %}<div class="frame"><img src="{{ founder.image.url }}" alt="{{ founder.name }}" loading="lazy"></div>{% endif %}
+    </div>
+    <div class="founder-copy" data-reveal="right">
+      <span class="role">{{ founder.role_title }}</span>
+      <h2 id="founder-h">{{ founder.name }}</h2>
+      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
+      {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
+      <a href="{% url 'about' %}" class="btn btn-secondary" style="margin-top:1.8rem;">Read the Full Story</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <!-- ============================== PROBLEM ============================== -->
 <section class="section" aria-labelledby="problem-h">
   <div class="container problem-layout">
@@ -242,25 +261,6 @@
     <div class="roadmap-track" data-render="roadmap"></div>
   </div>
 </section>
-
-<!-- ============================ FOUNDER TEASER ============================ -->
-{% if founder %}
-<section class="section" aria-labelledby="founder-h">
-  <div class="container founder-layout">
-    <div class="founder-media" data-reveal="left">
-      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-      {% if founder.image %}<div class="frame"><img src="{{ founder.image.url }}" alt="{{ founder.name }}" loading="lazy"></div>{% endif %}
-    </div>
-    <div class="founder-copy" data-reveal="right">
-      <span class="role">{{ founder.role_title }}</span>
-      <h2 id="founder-h">{{ founder.name }}</h2>
-      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
-      {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
-      <a href="{% url 'about' %}" class="btn btn-secondary" style="margin-top:1.8rem;">Read the Full Story</a>
-    </div>
-  </div>
-</section>
-{% endif %}
 
 <!-- ============================ DONATE CTA ============================ -->
 <section class="section section--alt" aria-labelledby="donate-h">

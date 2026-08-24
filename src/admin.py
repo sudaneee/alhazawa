@@ -65,6 +65,7 @@ class GeneralInformationAdmin(SingletonAdmin):
     fieldsets = (
         ("Identity", {"fields": ("org_name", "founder_name", "logo", "logo2")}),
         ("Contact", {"fields": ("address", "email", "tel", "whatsapp", "website")}),
+        ("Bank Transfer (Donate page)", {"fields": ("bank_name", "bank_account_name", "bank_account_number")}),
         ("Social Links", {"fields": ("facebook_url", "instagram_url", "twitter_url")}),
         ("Strategic Statements", {"fields": ("vision", "mission", "future_centre_intro", "future_centre_concept_image")}),
         ("Homepage Hero", {"fields": ("hero_image_main", "hero_image_float", "hero_badge_number", "hero_badge_label")}),

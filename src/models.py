@@ -30,6 +30,12 @@ class GeneralInformation(models.Model):
     whatsapp = models.CharField(max_length=50, null=True, blank=True)
     website = models.CharField(max_length=200, null=True, blank=True)
 
+    # Bank transfer details for the Donate page — placeholder until the
+    # Foundation confirms real account details.
+    bank_name = models.CharField(max_length=200, null=True, blank=True)
+    bank_account_name = models.CharField(max_length=200, null=True, blank=True)
+    bank_account_number = models.CharField(max_length=100, null=True, blank=True)
+
     # Social links — leave blank to hide the icon on the front end
     facebook_url = models.URLField(null=True, blank=True)
     instagram_url = models.URLField(null=True, blank=True)

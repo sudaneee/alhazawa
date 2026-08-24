@@ -116,6 +116,9 @@ class Command(BaseCommand):
         g.donateHead = g.donateHead or "Your Support Can Become Someone's Future"
         g.teamHead = g.teamHead or "Governance"
         g.contactHead = g.contactHead or "Let's Talk About What's Possible"
+        g.bank_name = g.bank_name or "Bank Name (to be confirmed)"
+        g.bank_account_name = g.bank_account_name or "Alhazawa Orphans & Girl Child Foundation"
+        g.bank_account_number = g.bank_account_number or "XXXX XXXX XXXX"
         g.save()
         self.stdout.write("GeneralInformation seeded.")
 
