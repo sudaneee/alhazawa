@@ -1,0 +1,13 @@
+# Virtual environments — never belong in version control
+env/
+tenzin/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Collected static output (regenerated via collectstatic)
+static/
+
+# Stray artifact
+]

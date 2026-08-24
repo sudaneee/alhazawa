@@ -1,467 +1,342 @@
-
-{% extends 'src/base.html' %}
+{% extends "src/base.html" %}
 {% load static %}
-{% block content%}
-    
+{% block title %}{{ g_info.org_name }} | Building Futures, Restoring Dignity{% endblock %}
+{% block description %}{{ g_info.org_name }} is a community-based nonprofit in Malumfashi, Northern Nigeria, providing education, welfare and empowerment for orphans and vulnerable girls.{% endblock %}
 
+{% block content %}
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 mb-5">
-        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {% for i in sliders %}
-                <div class="{% if forloop.counter == 1 %} carousel-item active {% else %} carousel-item {% endif %}">
-                    <img class="w-100" src="{{i.image.url}}" alt="Image">
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-7 pt-5">
-                                    <h3 class="display-10 text-white mb-3 animated slideInDown">{{i.title}}</h3>
-                                    <p class="fs-5 text-white-50 mb-5 animated slideInDown">{{i.content}}</p>
-                                    <a class="btn btn-primary py-2 px-3 animated slideInDown" href="">
-                                        Learn More
-                                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
-                                            <i class="fa fa-arrow-right"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-    <!-- Carousel End -->
-
-
-    <!-- About Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-
-            <!-- Welcome Note from the Founder -->
-            <div class="row g-5 align-items-center mb-5">
-                <div class="col-lg-4 wow fadeInLeft" data-wow-delay="0.1s">
-                    <img src="{{ picture.image.url }}" alt="Founder Picture" class="img-fluid rounded shadow">
-                    <h1>Prof. Mansir Dodo</h1>
-                    <h3>Founder</h3>
-                </div>
-                <div class="col-lg-8 wow fadeInRight" data-wow-delay="0.3s">
-                    <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Welcome Note</div>
-                    <h2 class="mb-3">{{ welcome_note.tag }}</h2>
-                    <p style="text-align: justify; white-space: pre-line;">
-                        {{ welcome_note.content }}
-                    </p>
-                </div>
-            </div>
-
-            <!-- Appreciation Video Section -->
-            <div class="row g-5 mb-5">
-                <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Founder’s Message</div>
-                    <h2 class="mb-3">{{ appreciation_video.tag }}</h2>
-                    <div class="ratio ratio-16x9 rounded shadow">
-                        <video controls>
-                            <source src="{{ appreciation_video.video.url }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Original About Us Section -->
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="position-relative overflow-hidden h-100" style="min-height: 400px;">
-                        <img class="position-absolute w-100 h-100 pt-5 pe-5" src="{{ about.image1.url }}" alt="" style="object-fit: cover;">
-                        <img class="position-absolute top-0 end-0 bg-white ps-2 pb-2" src="{{ about.image2.url }}" alt="" style="width: 200px; height: 200px;">
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="h-100">
-                        <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">About Us</div>
-                        <h1 class="display-6 mb-5">{{ about.title }}</h1>
-                        <p class="mb-5">{{ about.content }}</p>
-                        <a class="btn btn-primary py-2 px-3 me-3" href="">
-                            Learn More
-                            <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
-                                <i class="fa fa-arrow-right"></i>
-                            </div>
-                        </a>
-                        <a class="btn btn-outline-primary py-2 px-3" href="">
-                            Contact Us
-                            <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                                <i class="fa fa-arrow-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- About End -->
-
-
-
-
-
-    {% comment %} <!-- Causes Start -->
-    <div class="container-xxl bg-light my-5 py-5">
-        <div class="container py-5">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Feature Causes</div>
-                <h1 class="display-6 mb-5">{{g_info.causeHead}}</h1>
-            </div>
-            <div class="row g-4 justify-content-center">
-                {% for i in causes %}
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="causes-item d-flex flex-column bg-white border-top border-5 border-primary rounded-top overflow-hidden h-100">
-                        <div class="text-center p-4 pt-0">
-                            <div class="d-inline-block bg-primary text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
-                                <small>{{i.tag}}</small>
-                            </div>
-                            <h5 class="mb-3">{{i.title}}</h5>
-                            <p>{{i.content}}</p>
-                            <div class="causes-progress bg-light p-3 pt-2">
-                                <div class="d-flex justify-content-between">
-                                    <p class="text-dark">${{i.goal}} <small class="text-body">Goal</small></p>
-                                    <p class="text-dark">${{i.raised}} <small class="text-body">Raised</small></p>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{i.percentage}}" aria-valuemin="0" aria-valuemax="100">
-                                        <span>{{i.percentage}}%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="position-relative mt-auto">
-                            <img class="img-fluid" src="{{i.image.url}}" alt="">
-                            <div class="causes-overlay">
-                                <a class="btn btn-outline-primary" href="">
-                                    Read More
-                                    <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                                        <i class="fa fa-arrow-right"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <!-- Causes End --> {% endcomment %}
-
-
-    <!-- Service Start -->
-
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">What We Do</div>
-                <h1 class="display-6 mb-5">{{ g_info.whatHead }}</h1>
-            </div>
-
-            <div class="row g-4 justify-content-center">
-
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="h-100">
-                        <h2 class="text-center mb-4">Long Vacation Lesson</h2>
-                        {% if long_vacation_paragraph %}
-                            <p class="lead text-center">{{ long_vacation_paragraph.content }}</p>
-                        {% endif %}
-
-                        {% if long_vacation_images or long_vacation_videos %}
-                        <div id="vacationCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                {% for img in long_vacation_images %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ img.image.url }}" class="d-block w-100 rounded shadow" alt="{{ img.caption }}">
-                                    </div>
-                                {% endfor %}
-                                {% for vid in long_vacation_videos %}
-                                    <div class="carousel-item {% if forloop.first and not long_vacation_images %}active{% endif %}">
-                                        <video class="d-block w-100 rounded shadow" autoplay muted loop playsinline controls>
-                                            <source src="{{ vid.video.url }}" type="video/mp4">
-                                        </video>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#vacationCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#vacationCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="h-100">
-                        <h2 class="text-center mb-4">Classroom Sessions</h2>
-                        {% if classroom_paragraph %}
-                            <p class="lead text-center">{{ classroom_paragraph.content }}</p>
-                        {% endif %}
-
-                        {% if classroom_images or classroom_videos %}
-                        <div id="classroomCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                {% for img in classroom_images %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ img.image.url }}" class="d-block w-100 rounded shadow" alt="{{ img.caption }}">
-                                    </div>
-                                {% endfor %}
-                                {% for vid in classroom_videos %}
-                                    <div class="carousel-item {% if forloop.first and not classroom_images %}active{% endif %}">
-                                        <video class="d-block w-100 rounded shadow" autoplay muted loop playsinline controls>
-                                            <source src="{{ vid.video.url }}" type="video/mp4">
-                                        </video>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#classroomCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#classroomCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="h-100">
-                        <h2 class="text-center mb-4">Feeding Programme</h2>
-                        {% if feeding_paragraph %}
-                            <p class="lead text-center">{{ feeding_paragraph.content }}</p>
-                        {% endif %}
-
-                        {% if feeding_images or feeding_videos %}
-                        <div id="feedingCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                {% for img in feeding_images %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ img.image.url }}" class="d-block w-100 rounded shadow" alt="{{ img.caption }}">
-                                    </div>
-                                {% endfor %}
-                                {% for vid in feeding_videos %}
-                                    <div class="carousel-item {% if forloop.first and not feeding_images %}active{% endif %}">
-                                        <video class="d-block w-100 rounded shadow" autoplay muted loop playsinline controls>
-                                            <source src="{{ vid.video.url }}" type="video/mp4">
-                                        </video>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#feedingCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#feedingCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-            </div>
-            </div>
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">{{ g_info.org_name }}</span>
+      <h1 data-reveal="up">Building Futures.<br>Restoring <em>Dignity.</em></h1>
+      <p class="lead" data-reveal="up" data-reveal-delay="120">Creating pathways to education, care, empowerment and self-reliance for orphans and vulnerable girls across underserved communities of Northern Nigeria.</p>
+      <div class="hero-actions" data-reveal="up" data-reveal-delay="220">
+        <a href="{% url 'donate' %}" class="btn btn-primary">Support Our Mission</a>
+        <a href="{% url 'impact' %}" class="btn btn-secondary">Explore Our Impact</a>
+      </div>
+      <div class="hero-location" data-reveal="up" data-reveal-delay="300">
+        <span class="dot"></span> Malumfashi, Katsina State — Northern Nigeria
+      </div>
     </div>
 
-    <!-- Service End -->
+    <div class="hero-visual" data-reveal="scale">
+      <div class="hero-blob" data-parallax="0.04" aria-hidden="true">
+        <svg viewBox="0 0 600 600" fill="none">
+          <circle class="hero-orbit" cx="300" cy="300" r="260" stroke="url(#g1)" stroke-width="1.5" stroke-dasharray="2 14" stroke-linecap="round"/>
+          <circle class="hero-orbit--rev" cx="300" cy="300" r="220" stroke="#29B6E8" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="1 10" stroke-linecap="round"/>
+          <path class="hero-orbit" d="M300 60a240 240 0 1 0 .1 0" stroke="#1E4DA0" stroke-opacity=".18" stroke-width="34" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="600" y2="600">
+              <stop offset="0" stop-color="#1E4DA0"/>
+              <stop offset="1" stop-color="#29B6E8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="hero-particles" data-particles aria-hidden="true"></div>
 
-
-    <!-- Team Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Team Members</div>
-                <h1 class="display-6 mb-5">{{g_info.teamHead}}</h1>
-            </div>
-            <div class="row g-4">
-                {% for i in trustee %}
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item position-relative rounded overflow-hidden">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{i.image.url}}" alt="">
-                        </div>
-                        <div class="team-text bg-light text-center p-4">
-                            <h5>{{i.name}}</h5>
-                            <p class="text-primary">{{i.designation}}</p>
-                            <div class="team-social text-center">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {%endfor%}
-            </div>
-        </div>
+      {% if g_info.hero_image_main %}
+      <figure class="hero-photo-main">
+        <img src="{{ g_info.hero_image_main.url }}" alt="Children take part in a Foundation lesson." loading="eager">
+      </figure>
+      {% endif %}
+      {% if g_info.hero_image_float %}
+      <figure class="hero-photo-float">
+        <img src="{{ g_info.hero_image_float.url }}" alt="A Foundation programme moment." loading="lazy">
+      </figure>
+      {% endif %}
+      {% if g_info.hero_badge_number %}
+      <div class="hero-badge">
+        <span class="num"><span data-counter="{{ g_info.hero_badge_number }}">0</span></span>
+        <span class="cap">{{ g_info.hero_badge_label }}</span>
+      </div>
+      {% endif %}
     </div>
-    <!-- Team End -->
+  </div>
+</section>
 
-
-
-
-
-    <!-- Gallery Start -->
-    <div class="container-xxl bg-light my-5">
-        <div class="photo-gallery">
-            <div class="container">
-                <div class="intro">
-                    <h2 class="text-center">Our Gallery</h2>
-                    <p class="text-center">
-                        Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae.
-                    </p>
-                </div>
-
-                <!-- Square-Crop Image Styling -->
-                <style>
-                    .photos .item {
-                        overflow: hidden;
-                        height: 250px;
-                        margin-bottom: 20px;
-                        border-radius: 8px;
-                    }
-
-                    .photos .item img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        transition: transform 0.3s ease;
-                    }
-
-                    .photos .item img:hover {
-                        transform: scale(1.05);
-                    }
-                </style>
-
-                <div class="row photos">
-                    {% for i in galleries %}
-                    <div class="col-sm-6 col-md-4 col-lg-3 item">
-                        <a href="{{ i.image.url }}" data-lightbox="photos">
-                            <img class="img-fluid" src="{{ i.image.url }}">
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="text-center mt-4">
-                    <a class="btn btn-outline-primary px-3" href="">
-                        More
-                        <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+<!-- ======================= FLOATING IMPACT STRIP ======================= -->
+<div class="impact-strip-wrap">
+  <div class="container">
+    <div class="impact-strip" data-reveal="up">
+      <div class="impact-item"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg></div><strong>Education</strong><p>Academic support, learning materials and structured lessons.</p></div>
+      <div class="impact-item"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/></svg></div><strong>Welfare</strong><p>Feeding, shelter, health referrals and psychosocial care.</p></div>
+      <div class="impact-item"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg></div><strong>Girl-Child Empowerment</strong><p>Life skills, mentorship and confidence-building.</p></div>
+      <div class="impact-item"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M8 13V6a2 2 0 1 1 4 0v6M12 12V4a2 2 0 1 1 4 0v8"/></svg></div><strong>Community</strong><p>Partnership with families, leaders and host communities.</p></div>
+      <div class="impact-item"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L15 12l-2-2 1.7-1.7Z"/></svg></div><strong>Self-Reliance</strong><p>Skills training toward long-term independence.</p></div>
     </div>
-    <!-- Gallery End -->
+  </div>
+</div>
 
-    <!-- Donate Start -->
-    <div class="container-fluid donate my-5 py-5" data-parallax="scroll" data-image-src="{% static 'src/img/carousel-2.jpg' %}">
-        <div class="container py-5">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Donate Now</div>
-                    <h1 class="display-6 text-white mb-5">{{g_info.donateHead}}</h1>
-                    <p class="text-white-50 mb-0">{{g_info.donateContent}}</p>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="h-100 bg-white p-5">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control bg-light border-0" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="btn-group d-flex justify-content-around">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
-                                        <label class="btn btn-light py-3" for="btnradio1">$10</label>
-
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2">
-                                        <label class="btn btn-light py-3" for="btnradio2">$20</label>
-
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3">
-                                        <label class="btn btn-light py-3" for="btnradio3">$30</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary px-5" style="height: 60px;">
-                                        Donate Now
-                                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
-                                            <i class="fa fa-arrow-right"></i>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- ============================== PROBLEM ============================== -->
+<section class="section" aria-labelledby="problem-h">
+  <div class="container problem-layout">
+    <div class="problem-copy">
+      <span class="eyebrow">The Challenge</span>
+      <h2 id="problem-h" data-reveal="up">Millions of children are waiting for a chance.</h2>
+      <p class="lead" data-reveal="up" data-reveal-delay="100">Across underserved communities in Northern Nigeria, orphaned children and vulnerable girls face overlapping barriers to education, welfare and opportunity — barriers that compound each other, quietly, for years.</p>
+      <ul class="problem-list" data-stagger>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Loss of parental care</strong><span class="note">Orphaned children often lose not just guardianship, but stability, advocacy and continuity of schooling.</span></div></li>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Poverty &amp; economic hardship</strong><span class="note">Basic needs compete directly with school fees, materials and time — and basic needs usually win.</span></div></li>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Barriers specific to the girl-child</strong><span class="note">Cultural expectations, early marriage risk and domestic responsibility disproportionately push girls out of the classroom.</span></div></li>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Insecurity &amp; lack of infrastructure</strong><span class="note">In communities with too few schools and too little protection, exclusion becomes the default, not the exception.</span></div></li>
+      </ul>
+      <p class="context-note">Contextual information drawn from the Foundation's Strategic Plan.</p>
     </div>
-    <!-- Donate End -->
-
-
-
-
-
-    <!-- Testimonial Start --
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Testimonial</div>
-                <h1 class="display-6 mb-5">{{g_info.testimonieHead}}</h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                {% for i in testimoinies%}
-                <div class="testimonial-item text-center">
-                    <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="{{i.image.url}}" style="width: 100px; height: 100px;">
-                    <div class="testimonial-text rounded text-center p-4">
-                        <p>{{i.content}}</p>
-                        <h5 class="mb-1">{{i.name}}</h5>
-                        <span class="fst-italic">{{i.profession}}</span>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+    <div class="map-panel" data-reveal="scale">
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <defs><radialGradient id="mapGlow" cx="50%" cy="35%" r="60%"><stop offset="0" stop-color="#29B6E8" stop-opacity=".35"/><stop offset="1" stop-color="#29B6E8" stop-opacity="0"/></radialGradient></defs>
+        <rect width="400" height="400" fill="url(#mapGlow)"/>
+        <g stroke="#ffffff" stroke-opacity=".14" stroke-width="1"><circle cx="200" cy="200" r="70"/><circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="170"/></g>
+        <g fill="#63CDF1"><circle cx="200" cy="200" r="5"/><circle cx="150" cy="150" r="2.5" opacity=".7"/><circle cx="250" cy="170" r="2" opacity=".6"/><circle cx="230" cy="250" r="2.5" opacity=".7"/><circle cx="160" cy="240" r="2" opacity=".5"/></g>
+      </svg>
+      <div class="map-label">
+        <div class="pin"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.6"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <strong>Malumfashi</strong>
+        <span>Katsina State, Northern Nigeria</span>
+      </div>
     </div>
-    <!-- Testimonial End -->
+  </div>
+</section>
 
+<!-- ============================== PURPOSE ============================== -->
+<section class="section section--alt" aria-labelledby="purpose-h">
+  <div class="container split">
+    <div class="split-media" data-reveal="left">
+      {% if about.image1 %}<div class="frame"><img src="{{ about.image1.url }}" alt="{{ about.title }}" loading="lazy"></div>{% endif %}
+      <div class="frame-tag">A safe, supportive environment for every beneficiary</div>
+    </div>
+    <div data-reveal="right">
+      <span class="eyebrow">Why We Exist</span>
+      <h2 id="purpose-h">{{ about.title|default:"Every child deserves the opportunity to become everything they can be." }}</h2>
+      <p style="margin-top:1.3rem;font-size:var(--fs-lead);color:var(--text-muted);max-width:52ch;">{{ about.content }}</p>
+      <div class="purpose-chain">
+        <span>Education</span><span class="arrow">→</span><span>Dignity</span><span class="arrow">→</span><span>Confidence</span><span class="arrow">→</span><span>Opportunity</span><span class="arrow">→</span><span>Self-Reliance</span>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ========================== VISION & MISSION ========================== -->
+<section class="section" aria-labelledby="vm-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Vision &amp; Mission</span>
+      <h2 id="vm-h">Guided by dignity. Driven by purpose.</h2>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-panel vision" data-reveal="left">
+        <div class="vm-ring" aria-hidden="true"></div>
+        <span class="vm-index">01</span>
+        <h3>Our Vision</h3>
+        <p>{{ g_info.vision }}</p>
+      </div>
+      <div class="vm-panel mission" data-reveal="right">
+        <span class="vm-index">02</span>
+        <h3>Our Mission</h3>
+        <p>{{ g_info.mission }}</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ============================== VALUES ============================== -->
+<section class="section section--alt" aria-labelledby="values-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Core Values</span>
+      <h2 id="values-h">What guides every decision we make.</h2>
+    </div>
+    <div class="values-row" data-render="values" data-stagger></div>
+  </div>
+</section>
 
+<!-- ============================ PILLARS ============================ -->
+<section class="section" aria-labelledby="pillars-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Our Four Strategic Pillars</span>
+      <h2 id="pillars-h">Where our work is focused.</h2>
+      <p>Every programme the Foundation runs sits within one of four strategic focus areas, developed to address the full picture of a child's needs — not just the classroom.</p>
+    </div>
+    <div class="pillars-grid" data-render="pillars" data-stagger></div>
+  </div>
+</section>
 
+<!-- ============================ BENEFICIARIES ============================ -->
+<section class="section section--alt" aria-labelledby="who-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Who We Serve</span>
+      <h2 id="who-h">Every programme centers on a child.</h2>
+      <p>The Foundation's primary and secondary beneficiaries, as defined in its Strategic Plan.</p>
+    </div>
+    <div class="beneficiary-grid" data-render="beneficiaries" data-stagger></div>
+  </div>
+</section>
 
+<!-- ========================== A DAY WITH THE FOUNDATION ========================== -->
+<section class="section" aria-labelledby="day-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">A Day With The Foundation</span>
+      <h2 id="day-h">What a lesson day looks like.</h2>
+      <p>An illustrative walk through a long vacation lesson day — built from the Foundation's documented activities.</p>
+    </div>
+    <div class="timeline" data-render="timeline"></div>
+  </div>
+</section>
 
-{% endblock content%}
+<!-- ============================ PHOTO STORY ============================ -->
+<section class="section section--alt" aria-labelledby="gallery-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Impact That You Can See</span>
+      <h2 id="gallery-h">A photo story from Alhazawa.</h2>
+      <p>Real photographs from the Foundation's programmes.</p>
+    </div>
+    <div class="gallery-filters" data-render="gallery-filters"></div>
+    <div class="masonry" data-render="masonry"></div>
+  </div>
+</section>
+
+<!-- ============================ FUTURE CENTRE TEASER ============================ -->
+<section class="section section--navy" aria-labelledby="centre-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Our Future</span>
+      <h2 id="centre-h">A Place Designed For Possibility.</h2>
+      <p>{{ g_info.future_centre_intro }}</p>
+    </div>
+    <div style="text-align:center;margin-top:1rem;">
+      <a href="{% url 'future_centre' %}" class="btn btn-ghost">Explore the Future Centre</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PILOT PROGRAMS ============================ -->
+<section class="section" aria-labelledby="pilots-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Where We Start. Where We Grow.</span>
+      <h2 id="pilots-h">Pilot Programs</h2>
+      <p>Priority is given to programs that demonstrate high impact, cost-effectiveness and alignment with the Foundation's mission.</p>
+    </div>
+    <div class="pilot-grid" data-render="pilots" data-stagger></div>
+  </div>
+</section>
+
+<!-- ============================ ROADMAP ============================ -->
+<section class="section section--alt" aria-labelledby="roadmap-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Short Term → Mid to Long Term</span>
+      <h2 id="roadmap-h">A clear, phased roadmap.</h2>
+    </div>
+    <div class="roadmap-track" data-render="roadmap"></div>
+  </div>
+</section>
+
+<!-- ============================ FOUNDER TEASER ============================ -->
+{% if founder %}
+<section class="section" aria-labelledby="founder-h">
+  <div class="container founder-layout">
+    <div class="founder-media" data-reveal="left">
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      {% if founder.image %}<div class="frame"><img src="{{ founder.image.url }}" alt="{{ founder.name }}" loading="lazy"></div>{% endif %}
+    </div>
+    <div class="founder-copy" data-reveal="right">
+      <span class="role">{{ founder.role_title }}</span>
+      <h2 id="founder-h">{{ founder.name }}</h2>
+      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
+      {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
+      <a href="{% url 'about' %}" class="btn btn-secondary" style="margin-top:1.8rem;">Read the Full Story</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================ DONATE CTA ============================ -->
+<section class="section section--alt" aria-labelledby="donate-h">
+  <div class="container">
+    <div class="donate-cta" data-reveal="scale">
+      <span class="eyebrow" style="justify-content:center;color:var(--cyan-300);">Support The Mission</span>
+      <h2 id="donate-h">Your Support Can Become Someone's Future.</h2>
+      <p>Help us expand access to education, welfare and empowerment for vulnerable children across Northern Nigeria.</p>
+      <div class="hero-actions">
+        <a href="{% url 'donate' %}" class="btn btn-gold">Support the Mission</a>
+        <a href="{% url 'contact' %}" class="btn btn-ghost">Partner With Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PARTNERSHIP ============================ -->
+<section class="section" aria-labelledby="partner-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">We Cannot Do This Alone</span>
+      <h2 id="partner-h">Partnership makes this possible.</h2>
+    </div>
+    <div class="partner-grid" data-render="partners" data-stagger></div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="{% url 'contact' %}" class="btn btn-primary">Become a Partner</a>
+    </div>
+  </div>
+</section>
+
+{% if videos %}
+<!-- ============================ VIDEO MOMENTS ============================ -->
+<section class="section section--alt" aria-labelledby="video-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">In Motion</span>
+      <h2 id="video-h">A closer look, on video.</h2>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+      {% for v in videos %}
+      <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);background:#000;">
+        <video controls preload="none" style="width:100%;display:block;" {% if v.category %}poster=""{% endif %}>
+          <source src="{{ v.video.url }}" type="video/mp4">
+        </video>
+        {% if v.caption %}<p style="padding:.9rem 1.1rem;font-size:.85rem;color:var(--text-muted);">{{ v.caption }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================ NEWS TEASER ============================ -->
+<section class="section" aria-labelledby="news-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Stories</span>
+      <h2 id="news-h">From the field.</h2>
+    </div>
+    <div class="stories-grid" data-render="stories-home"></div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="{% url 'stories' %}" class="btn btn-secondary">Read All Stories</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const root = document.querySelector("[data-render='stories-home']");
+    if (!root || !window.ALHAZAWA_DATA) return;
+    root.innerHTML = window.ALHAZAWA_DATA.stories.slice(0, 3).map((s) => `
+      <article class="story-card" data-reveal="up">
+        <div class="s-media"><img src="${s.image}" alt="${s.title}" loading="lazy">${s.sample ? '<span class="sample-flag">Sample story</span>' : ""}</div>
+        <div class="s-body"><span class="s-cat">${s.category}</span><h4>${s.title}</h4><p>${s.excerpt}</p><span class="s-date">${s.date}</span></div>
+      </article>
+    `).join("");
+    requestAnimationFrame(() => root.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("is-visible")));
+  });
+</script>
+{% endblock %}

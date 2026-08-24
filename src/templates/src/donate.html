@@ -1,0 +1,82 @@
+{% extends "src/base.html" %}
+{% block title %}Donate | {{ g_info.org_name }}{% endblock %}
+{% block description %}Support {{ g_info.org_name }}'s education, feeding, learning materials, girl-child empowerment and Future Centre programmes.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-crumb"><a href="{% url 'home' %}">Home</a> / <span>Donate</span></div>
+    <span class="eyebrow">Support The Mission</span>
+    <h1 data-reveal="up">Your Support Can Become Someone's Future.</h1>
+    <p class="lead" data-reveal="up" data-reveal-delay="100">Help us expand access to education, welfare and empowerment for vulnerable children in Alhazawa and beyond.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:920px;">
+    <form id="donate-form">
+      <div class="section-head">
+        <span class="eyebrow">Step 01</span>
+        <h2>Choose where your support goes.</h2>
+      </div>
+      <div class="donation-grid" data-render="donation-areas" data-stagger></div>
+
+      <div class="section-head" style="margin-top:3rem;">
+        <span class="eyebrow">Step 02</span>
+        <h2>Choose an amount.</h2>
+      </div>
+      <div class="amount-selector" data-render="amounts"></div>
+
+      <div class="donate-summary" data-donate-summary>
+        <div>
+          <span class="ds-label">You are supporting</span>
+          <div class="ds-value" data-summary-area style="font-size:1.1rem;">General Support</div>
+        </div>
+        <div>
+          <span class="ds-label">Amount</span>
+          <div class="ds-value" data-summary-amount>Select an amount</div>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:3rem;">
+        <span class="eyebrow">Step 03</span>
+        <h2>Continue.</h2>
+        <p>This is a demonstration interface. Online payment processing is not yet connected to this website.</p>
+      </div>
+      <button type="submit" class="btn btn-primary">Continue to Give</button>
+
+      <div id="donate-note" hidden style="margin-top:1.6rem;padding:1.5rem 1.7rem;border-radius:var(--radius-md);background:var(--sky-50);border:1px solid var(--border-soft);">
+        <strong style="display:block;color:var(--navy-900);margin-bottom:.5rem;">Thank you for choosing to give.</strong>
+        <p style="color:var(--text-muted);font-size:.95rem;">Online payment processing is being set up for this website and is not yet live. To complete your donation today, please contact the Foundation directly — we will be glad to arrange it with you personally.</p>
+        <p style="margin-top:.9rem;font-weight:700;color:var(--royal-700);">Call or WhatsApp: <a href="tel:{{ g_info.tel }}">{{ g_info.tel }}</a></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="areas-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Where Your Gift Goes</span>
+      <h2 id="areas-h">Every focus area, explained.</h2>
+    </div>
+    <div class="pillars-grid" data-render="pillars" data-stagger></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="partner-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">We Cannot Do This Alone</span>
+      <h2 id="partner-h">Other ways to help.</h2>
+      <p>Not ready to give financially? These categories of partnership matter just as much.</p>
+    </div>
+    <div class="partner-grid" data-render="partners" data-stagger></div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="{% url 'contact' %}" class="btn btn-secondary">Become a Partner</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

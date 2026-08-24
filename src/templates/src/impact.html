@@ -1,0 +1,92 @@
+{% extends "src/base.html" %}
+{% block title %}Our Impact | {{ g_info.org_name }}{% endblock %}
+{% block description %}See {{ g_info.org_name }}'s documented activities and real photographs from Alhazawa, Northern Nigeria.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-crumb"><a href="{% url 'home' %}">Home</a> / <span>Impact</span></div>
+    <span class="eyebrow">Impact That You Can See</span>
+    <h1 data-reveal="up">Evidence, Not Estimates.</h1>
+    <p class="lead" data-reveal="up" data-reveal-delay="100">Rather than publish numbers we cannot verify, we show you the work directly — real photographs and documented activities from the Foundation's programmes in Alhazawa.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="ach-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Documented Activities</span>
+      <h2 id="ach-h">What's already happening on the ground.</h2>
+    </div>
+    <div class="pillars-grid" data-render="pillars" data-stagger></div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="gallery-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Photo Story</span>
+      <h2 id="gallery-h">The work, in photographs.</h2>
+      <p>Every image on this page is a real photograph from the Foundation's own programme activity.</p>
+    </div>
+    <div class="gallery-filters" data-render="gallery-filters"></div>
+    <div class="masonry" data-render="masonry"></div>
+  </div>
+</section>
+
+{% if videos %}
+<section class="section" aria-labelledby="video-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">On Video</span>
+      <h2 id="video-h">The work, in motion.</h2>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+      {% for v in videos %}
+      <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);background:#000;">
+        <video controls preload="none" style="width:100%;display:block;">
+          <source src="{{ v.video.url }}" type="video/mp4">
+        </video>
+        {% if v.caption %}<p style="padding:.9rem 1.1rem;font-size:.85rem;color:var(--text-muted);">{{ v.caption }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section{% if videos %} section--alt{% endif %}" aria-labelledby="day-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">A Day With The Foundation</span>
+      <h2 id="day-h">Inside a lesson day.</h2>
+    </div>
+    <div class="timeline" data-render="timeline"></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="roadmap-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Where This Is Headed</span>
+      <h2 id="roadmap-h">Short term. Mid to long term.</h2>
+    </div>
+    <div class="roadmap-track" data-render="roadmap"></div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="cta-h">
+  <div class="container">
+    <div class="donate-cta" data-reveal="scale">
+      <span class="eyebrow" style="justify-content:center;color:var(--cyan-300);">Help Us Grow This Record</span>
+      <h2 id="cta-h">Every gift becomes a new photograph of progress.</h2>
+      <div class="hero-actions">
+        <a href="{% url 'donate' %}" class="btn btn-gold">Support the Mission</a>
+        <a href="{% url 'stories' %}" class="btn btn-ghost">Read Our Stories</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

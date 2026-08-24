@@ -1,104 +1,86 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
 from src.models import (
-    Slider,
-    About,
-    FeatureCause,
-    WhatWeDo,
-    Trustee,
-    Testimonie,
-    Outlet,
-    GeneralInformation,
-    Gallery,
-    Picture,
-    Paragraph,
     GalleryVideo,
+    Testimonial,
+    InquiryType,
+    ContactMessage,
+    Pillar,
+    FutureCentreZone,
+    FuturePhase,
+    Story,
 )
-# Create your views here.
+
 
 def home(request):
-    aboutObject = About.objects.all().first()
-    sliderObjects = Slider.objects.all()[:2]
-    causeObjects = FeatureCause.objects.all()[:2]
-    trusteeObjects = Trustee.objects.all()
-    testimonieObjects = Testimonie.objects.all()[:3]
-    galleryObjects = Gallery.objects.all().order_by('-id')
-
-    # Safe lookups (avoid breaking if not found)
-    picture = Picture.objects.filter(tag="Founder").first()
-    welcome_note = Paragraph.objects.filter(tag__icontains="welcome").first()
-    appreciation_video = GalleryVideo.objects.filter(tag__icontains="appreciation").first()
-
-    # Long Vacation
-    long_vacation_images = Gallery.objects.filter(tag="long_vacation")
-    long_vacation_videos = GalleryVideo.objects.filter(tag="long_vacation")
-    long_vacation_paragraph = Paragraph.objects.filter(tag="long_vacation").first()
-
-    # Classroom
-    classroom_images = Gallery.objects.filter(tag="classroom")
-    classroom_videos = GalleryVideo.objects.filter(tag="classroom")
-    classroom_paragraph = Paragraph.objects.filter(tag="classroom").first()
-
-    # Feeding
-    feeding_images = Gallery.objects.filter(tag="feeding")
-    feeding_videos = GalleryVideo.objects.filter(tag="feeding")
-    feeding_paragraph = Paragraph.objects.filter(tag="feeding").first()
-
     context = {
-        'sliders': sliderObjects,
-        'about': aboutObject,
-        'causes': causeObjects,
-        'trustee': trusteeObjects,
-        'testimoinies': testimonieObjects,
-        'galleries': galleryObjects,
-        'picture': picture,
-        'welcome_note': welcome_note,
-        'appreciation_video': appreciation_video,
-
-        # New programme sections
-        'long_vacation_images': long_vacation_images,
-        'long_vacation_videos': long_vacation_videos,
-        'long_vacation_paragraph': long_vacation_paragraph,
-
-        'classroom_images': classroom_images,
-        'classroom_videos': classroom_videos,
-        'classroom_paragraph': classroom_paragraph,
-
-        'feeding_images': feeding_images,
-        'feeding_videos': feeding_videos,
-        'feeding_paragraph': feeding_paragraph,
+        "testimonials": Testimonial.objects.all()[:3],
+        "videos": GalleryVideo.objects.select_related("category").all()[:2],
     }
-    return render(request, 'src/index.html', context)
-
+    return render(request, "src/index.html", context)
 
 
 def about(request):
-    aboutObject = About.objects.all().first()
-    whatObjects = WhatWeDo.objects.all()
-    trusteeObjects = Trustee.objects.all()
-    context = {
-        'about': aboutObject,
-        'wwd': whatObjects,
-        'trustee': trusteeObjects,
-    }
-    return render (request, 'src/about.html', context)
+    return render(request, "src/about.html")
 
 
-def causes(request):
-    causeObjects = FeatureCause.objects.all()
+def programs(request):
     context = {
-        'causes': causeObjects,
+        "pillars": Pillar.objects.all(),
+        "skills_zone": FutureCentreZone.objects.filter(name__icontains="skill").first(),
     }
-    return render(request, 'src/causes.html', context)
+    return render(request, "src/programs.html", context)
+
+
+def impact(request):
+    context = {
+        "videos": GalleryVideo.objects.select_related("category").all(),
+    }
+    return render(request, "src/impact.html", context)
+
+
+def future_centre(request):
+    context = {
+        "zones": FutureCentreZone.objects.all(),
+        "phases": FuturePhase.objects.all(),
+    }
+    return render(request, "src/future_centre.html", context)
+
+
+def stories(request):
+    context = {
+        "featured_story": Story.objects.filter(is_featured=True).select_related("category").first(),
+    }
+    return render(request, "src/stories.html", context)
+
+
+def donate(request):
+    return render(request, "src/donate.html")
+
 
 def contact(request):
+    if request.method == "POST":
+        inquiry_type_id = request.POST.get("inquiry_type")
+        ContactMessage.objects.create(
+            inquiry_type_id=inquiry_type_id if inquiry_type_id else None,
+            name=request.POST.get("name", "").strip(),
+            email=request.POST.get("email", "").strip(),
+            phone=request.POST.get("phone", "").strip(),
+            subject=request.POST.get("subject", "").strip(),
+            message=request.POST.get("message", "").strip(),
+        )
+        messages.success(request, "sent")
+        return redirect("contact")
 
-    return render(request, 'src/contact.html')
+    context = {"inquiry_types": InquiryType.objects.all()}
+    return render(request, "src/contact.html", context)
 
 
-def gallery(request):
-    galleryObjects = Gallery.objects.all().order_by('-id')
-    context = {
-        'galleries': galleryObjects,
+# --- Backward-compatible redirects for the old template's routes ---------
+def legacy_causes_redirect(request):
+    return redirect("donate", permanent=True)
 
-    }
-    return render(request, 'src/gallery.html', context)
+
+def legacy_gallery_redirect(request):
+    return redirect("impact", permanent=True)

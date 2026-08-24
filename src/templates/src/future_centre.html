@@ -1,0 +1,109 @@
+{% extends "src/base.html" %}
+{% block title %}The Future Centre | {{ g_info.org_name }}{% endblock %}
+{% block description %}Explore the Foundation's proposed Future Centre — a Standard School, Skills Acquisition Centre and Head Office in Alhazawa — a phased development vision.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-crumb"><a href="{% url 'home' %}">Home</a> / <span>Future Centre</span></div>
+    <span class="eyebrow">Proposed Centre — Development Vision</span>
+    <h1 data-reveal="up">A Place Designed For Possibility.</h1>
+    <p class="lead" data-reveal="up" data-reveal-delay="100">{{ g_info.future_centre_intro }}</p>
+  </div>
+</section>
+
+{% if g_info.future_centre_concept_image %}
+<section class="section">
+  <div class="container">
+    <div class="centre-hero" data-reveal="scale">
+      <img src="{{ g_info.future_centre_concept_image.url }}" alt="Conceptual visualization of the Foundation's proposed future Centre." loading="lazy">
+      <span class="tag">Conceptual view — this facility has not yet been built.</span>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section section--alt" aria-labelledby="zones-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Three Interactive Zones</span>
+      <h2 id="zones-h">One site, three purposes.</h2>
+    </div>
+    <div class="zones-grid">
+      {% for zone in zones %}
+      <article class="zone-card" data-reveal="up">
+        <span class="z-num">0{{ forloop.counter }}</span>
+        <h4>{{ zone.name }}</h4>
+        <p>{{ zone.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="site-h">
+  <div class="container problem-layout">
+    <div>
+      <span class="eyebrow">Site &amp; Phasing</span>
+      <h2 id="site-h">Grounded in a real, identified location.</h2>
+      <p class="lead" style="margin-top:1.2rem;">The Centre will be developed on the Foundation's identified site in Alhazawa. Development will be implemented in phases, in line with available resources and strategic priorities.</p>
+      <div class="context-note" style="margin-top:1.6rem;">This is a development vision drawn from the Foundation's Strategic Plan.</div>
+    </div>
+    <div class="map-panel" data-reveal="scale">
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <defs><radialGradient id="mapGlow2" cx="50%" cy="35%" r="60%"><stop offset="0" stop-color="#29B6E8" stop-opacity=".35"/><stop offset="1" stop-color="#29B6E8" stop-opacity="0"/></radialGradient></defs>
+        <rect width="400" height="400" fill="url(#mapGlow2)"/>
+        <g stroke="#ffffff" stroke-opacity=".14" stroke-width="1"><rect x="120" y="120" width="160" height="160" rx="10"/><rect x="150" y="150" width="100" height="100" rx="6"/></g>
+      </svg>
+      <div class="map-label">
+        <div class="pin"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.6"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <strong>Alhazawa</strong>
+        <span>Gangarawa, Malumfashi — identified Centre site</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="phase-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Phased Development</span>
+      <h2 id="phase-h">Built step by step, not all at once.</h2>
+    </div>
+    <div class="phase-track">
+      {% for phase in phases %}
+      <div class="phase-step{% if forloop.first %} is-active{% endif %}" data-reveal="up">
+        <span class="label">{{ phase.label }}</span>
+        <h5>{{ phase.title }}</h5>
+        <p>{{ phase.note }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="sustain-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Sustainability Strategy</span>
+      <h2 id="sustain-h">Built to last, not just to launch.</h2>
+      <p>To ensure long-term sustainability, the Foundation will pursue diversified funding sources including donations, grants, sponsorships, and strategic partnerships — with strong financial governance, transparent reporting, and efficient resource utilization at the center of every phase.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="cta-h">
+  <div class="container">
+    <div class="donate-cta" data-reveal="scale">
+      <span class="eyebrow" style="justify-content:center;color:var(--cyan-300);">Build With Us</span>
+      <h2 id="cta-h">Help move this vision from paper to place.</h2>
+      <div class="hero-actions">
+        <a href="{% url 'donate' %}" class="btn btn-gold">Support the Future Centre</a>
+        <a href="{% url 'contact' %}" class="btn btn-ghost">Discuss a Partnership</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

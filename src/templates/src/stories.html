@@ -1,0 +1,67 @@
+{% extends "src/base.html" %}
+{% block title %}Stories &amp; Events | {{ g_info.org_name }}{% endblock %}
+{% block description %}Foundation stories, programme updates and upcoming events from {{ g_info.org_name }} in Malumfashi, Northern Nigeria.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-crumb"><a href="{% url 'home' %}">Home</a> / <span>Stories</span></div>
+    <span class="eyebrow">Stories &amp; Events</span>
+    <h1 data-reveal="up">Dispatches From Alhazawa.</h1>
+    <p class="lead" data-reveal="up" data-reveal-delay="100">A magazine of Foundation stories, programme updates and community moments. Articles marked "Sample" are placeholder editorial content, structured for real stories to replace as they're published.</p>
+  </div>
+</section>
+
+{% if featured_story %}
+<section class="section">
+  <div class="container">
+    <article class="story-feature" data-reveal="scale">
+      {% if featured_story.image %}<div class="f-media"><img src="{{ featured_story.image.url }}" alt="{{ featured_story.title }}" loading="lazy"></div>{% endif %}
+      <div class="f-body">
+        {% if featured_story.is_sample %}<span class="sample-flag">Sample story</span>{% endif %}
+        {% if featured_story.category %}<span class="s-cat" style="display:block;margin-top:.8rem;">{{ featured_story.category.name }}</span>{% endif %}
+        <h3>{{ featured_story.title }}</h3>
+        <p style="color:var(--text-muted);font-size:1.02rem;">{{ featured_story.excerpt }}</p>
+        <a href="{% url 'donate' %}" class="btn btn-secondary" style="margin-top:1.4rem;">Support This Programme</a>
+      </div>
+    </article>
+  </div>
+</section>
+{% endif %}
+
+<section class="section section--alt" aria-labelledby="stories-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">All Stories</span>
+      <h2 id="stories-h">Browse by category.</h2>
+    </div>
+    <div class="story-filters" data-render="story-filters"></div>
+    <div class="stories-grid" data-render="stories"></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="events-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Events</span>
+      <h2 id="events-h">What's coming up.</h2>
+    </div>
+    <div class="events-grid" data-render="events" data-stagger></div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="cta-h">
+  <div class="container">
+    <div class="donate-cta" data-reveal="scale">
+      <span class="eyebrow" style="justify-content:center;color:var(--cyan-300);">Stay Close To The Work</span>
+      <h2 id="cta-h">Follow the Foundation's next chapter.</h2>
+      <div class="hero-actions">
+        <a href="{% url 'contact' %}" class="btn btn-gold">Get In Touch</a>
+        <a href="{% url 'donate' %}" class="btn btn-ghost">Support the Mission</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

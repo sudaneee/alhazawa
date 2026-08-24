@@ -1,115 +1,154 @@
-{% extends 'src/base.html' %}
-{% load static %}
-{% block content%}
+{% extends "src/base.html" %}
+{% block title %}About Us | {{ g_info.org_name }}{% endblock %}
+{% block description %}Learn about {{ g_info.org_name }}'s background, vision, mission, core values, founder, and community-centered approach.{% endblock %}
 
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container text-center">
-            <h1 class="display-4 text-white animated slideInDown mb-4">About Us</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">About Us</li>
-                </ol>
-            </nav>
-        </div>
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-crumb"><a href="{% url 'home' %}">Home</a> / <span>About</span></div>
+    <span class="eyebrow">About The Foundation</span>
+    <h1 data-reveal="up">From Vulnerability To Possibility.</h1>
+    <p class="lead" data-reveal="up" data-reveal-delay="100">{{ g_info.org_name }} is a community-based, legally registered nonprofit working to address the educational, welfare and developmental needs of orphans and vulnerable girls in underserved communities of Northern Nigeria.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="bg-h">
+  <div class="container split">
+    <div class="split-media" data-reveal="left">
+      {% if about.image2 %}<div class="frame"><img src="{{ about.image2.url }}" alt="{{ about.title }}" loading="lazy"></div>{% endif %}
+      <div class="frame-tag">Community-driven, from the ground up</div>
     </div>
-    <!-- Page Header End -->
-
-
-    <!-- About Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="position-relative overflow-hidden h-100" style="min-height: 400px;">
-                        <img class="position-absolute w-100 h-100 pt-5 pe-5" src="{{about.image1.url}}" alt="" style="object-fit: cover;">
-                        <img class="position-absolute top-0 end-0 bg-white ps-2 pb-2" src="{{about.image2.url}}" alt="" style="width: 200px; height: 200px;">
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="h-100">
-                        <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">About Us</div>
-                        <h1 class="display-6 mb-5">{{about.title}}</h1>
-
-                        <p class="mb-5">{{about.content}}</p>
-                        <a class="btn btn-primary py-2 px-3 me-3" href="">
-                            Learn More
-                            <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
-                                <i class="fa fa-arrow-right"></i>
-                            </div>
-                        </a>
-                        <a class="btn btn-outline-primary py-2 px-3" href="">
-                            Contact Us
-                            <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                                <i class="fa fa-arrow-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div data-reveal="right">
+      <span class="eyebrow">Organizational Background</span>
+      <h2 id="bg-h">A Foundation built for its community, by its community.</h2>
+      <p style="margin-top:1.3rem;font-size:1.05rem;color:var(--text-muted);max-width:56ch;">{{ about.content }}</p>
+      <p style="margin-top:1.1rem;font-size:1.05rem;color:var(--text-muted);max-width:56ch;">A Strategic Plan provides the structured framework that guides the Foundation's growth, aligns activities with its mission, supports leadership decision-making, and communicates priorities and accountability to stakeholders and donors.</p>
     </div>
-    <!-- About End -->
-    <!-- Service Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">What We Do</div>
-                <h1 class="display-6 mb-5">{{g_info.whatHead}}</h1>
-            </div>
-            <div class="row g-4 justify-content-center">
-                {% for i in wwd %}
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
-                        <img class="img-fluid mb-4" src="{{i.icon.url}}" alt="">
-                        <h4 class="mb-3">{{i.title}}</h4>
-                        <p class="mb-4">{{i.content}}</p>
-                        <a class="btn btn-outline-primary px-3" href="">
-                            Learn More
-                            <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                                <i class="fa fa-arrow-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                {%endfor%}
-            </div>
-        </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="purpose-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Our Purpose</span>
+      <h2 id="purpose-h">Every child deserves the opportunity to become everything they can be.</h2>
     </div>
-    <!-- Service End -->
-    <!-- Team Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Team Members</div>
-                <h1 class="display-6 mb-5">{{g_info.teamHead}}</h1>
-            </div>
-            <div class="row g-4">
-                {% for i in trustee %}
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item position-relative rounded overflow-hidden">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{i.image.url}}" alt="">
-                        </div>
-                        <div class="team-text bg-light text-center p-4">
-                            <h5>{{i.name}}</h5>
-                            <p class="text-primary">{{i.designation}}</p>
-                            <div class="team-social text-center">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {%endfor%}
-            </div>
-        </div>
+    <div class="purpose-chain" style="justify-content:center;font-size:1.2rem;">
+      <span>Education</span><span class="arrow">→</span><span>Dignity</span><span class="arrow">→</span><span>Confidence</span><span class="arrow">→</span><span>Opportunity</span><span class="arrow">→</span><span>Self-Reliance</span>
     </div>
-    <!-- Team End -->
+  </div>
+</section>
 
+<section class="section" aria-labelledby="vm-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Vision &amp; Mission</span>
+      <h2 id="vm-h">What we are working toward.</h2>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-panel vision" data-reveal="left">
+        <div class="vm-ring" aria-hidden="true"></div>
+        <span class="vm-index">01</span>
+        <h3>Our Vision</h3>
+        <p>{{ g_info.vision }}</p>
+      </div>
+      <div class="vm-panel mission" data-reveal="right">
+        <span class="vm-index">02</span>
+        <h3>Our Mission</h3>
+        <p>{{ g_info.mission }}</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="section section--alt" aria-labelledby="values-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Core Values</span>
+      <h2 id="values-h">Five values behind every programme.</h2>
+    </div>
+    <div class="values-row" data-render="values" data-stagger></div>
+  </div>
+</section>
 
-{% endblock content%}
+{% if founder %}
+<section class="section" aria-labelledby="founder-h">
+  <div class="container founder-layout">
+    <div class="founder-media" data-reveal="left">
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      {% if founder.image %}<div class="frame"><img src="{{ founder.image.url }}" alt="{{ founder.name }}" loading="lazy"></div>{% endif %}
+    </div>
+    <div class="founder-copy" data-reveal="right">
+      <span class="role">{{ founder.role_title }}</span>
+      <h2 id="founder-h">{{ founder.name }}</h2>
+      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
+      <p style="margin-top:.8rem;font-size:.95rem;color:var(--text-muted);">The Foundation is headquartered at {{ g_info.address }}.</p>
+      {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section section--alt" aria-labelledby="strategy-h">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Strategic Direction</span>
+      <h2 id="strategy-h">Four pillars. One structured plan.</h2>
+      <p>The Foundation's Strategic Plan organizes its work around four focus areas, a proposed future Centre, pilot projects, and a phased short-term-to-long-term roadmap.</p>
+    </div>
+    <div class="pillars-grid" data-render="pillars" data-stagger></div>
+  </div>
+</section>
+
+{% if team %}
+<section class="section" aria-labelledby="team-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Governance</span>
+      <h2 id="team-h">The people steering the Foundation.</h2>
+    </div>
+    <div class="beneficiary-grid">
+      {% for member in team %}
+      <div class="beneficiary-card" data-reveal="up" style="text-align:center;">
+        {% if member.image %}<div style="width:88px;height:88px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;"><img src="{{ member.image.url }}" alt="{{ member.name }}" style="width:100%;height:100%;object-fit:cover;"></div>{% endif %}
+        <h4>{{ member.name }}</h4>
+        <p>{{ member.designation }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section" aria-labelledby="gov-h">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Accountability</span>
+      <h2 id="gov-h">Accountability is not an afterthought.</h2>
+      <p>The Strategic Plan commits the Foundation to strong financial governance, transparent reporting, and efficient resource utilization.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card" data-reveal="up"><div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/></svg></div><h4>Governance</h4><p>Structured leadership and decision-making.</p></div>
+      <div class="trust-card" data-reveal="up" data-reveal-delay="60"><div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z"/></svg></div><h4>Impact Reporting</h4><p>Honest, evidence-based accounts of activity.</p></div>
+      <div class="trust-card" data-reveal="up" data-reveal-delay="120"><div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/><circle cx="12" cy="12" r="9"/></svg></div><h4>Strategic Planning</h4><p>A clear framework guiding growth and priorities.</p></div>
+      <div class="trust-card" data-reveal="up" data-reveal-delay="180"><div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L15 12l-2-2 1.7-1.7Z"/></svg></div><h4>Responsible Resource Use</h4><p>Diversified funding, efficiently deployed.</p></div>
+      <div class="trust-card" data-reveal="up" data-reveal-delay="240"><div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M8 13V6a2 2 0 1 1 4 0v6M12 12V4a2 2 0 1 1 4 0v8"/></svg></div><h4>Community Participation</h4><p>Shaped alongside families and community leaders.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="cta-h">
+  <div class="container">
+    <div class="donate-cta" data-reveal="scale">
+      <span class="eyebrow" style="justify-content:center;color:var(--cyan-300);">Join Us</span>
+      <h2 id="cta-h">Be part of the next chapter.</h2>
+      <div class="hero-actions">
+        <a href="{% url 'donate' %}" class="btn btn-gold">Support the Mission</a>
+        <a href="{% url 'contact' %}" class="btn btn-ghost">Partner With Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

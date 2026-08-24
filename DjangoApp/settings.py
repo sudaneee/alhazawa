@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!e9312aum*@woh)oc#-rp@41$%jtc^&mkgrgj14&25!#h4qzb+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Defaults OFF; set the DJANGO_DEBUG=True environment variable for local dev.
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -120,7 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Static files are served directly by nginx (see /etc/nginx/sites-enabled/alhazawa),
+# not through Django/whitenoise, so the default storage backend is all that's
+# needed here — no extra dependency required.
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
