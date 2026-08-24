@@ -11,3 +11,9 @@ static/
 
 # Stray artifact
 ]
+
+# Real data — lives only on the server (and your local dev copy), never
+# in git. Deploying via git pull/push must only ever touch code, not the
+# live database or uploaded media.
+db.sqlite3
+media/

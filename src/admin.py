@@ -68,6 +68,7 @@ class GeneralInformationAdmin(SingletonAdmin):
         ("Social Links", {"fields": ("facebook_url", "instagram_url", "twitter_url")}),
         ("Strategic Statements", {"fields": ("vision", "mission", "future_centre_intro", "future_centre_concept_image")}),
         ("Homepage Hero", {"fields": ("hero_image_main", "hero_image_float", "hero_badge_number", "hero_badge_label")}),
+        ("Homepage \"The Challenge\" Panel", {"fields": ("problem_section_image",)}),
         ("Section Headings", {
             "fields": (
                 "aboutHead", "causeHead", "whatHead", "donateHead", "donateContent",

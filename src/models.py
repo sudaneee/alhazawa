@@ -50,6 +50,7 @@ class GeneralInformation(models.Model):
     hero_image_float = models.ImageField(upload_to="pictures", null=True, blank=True, help_text="Small floating photo overlapping the main hero photo.")
     hero_badge_number = models.CharField(max_length=10, null=True, blank=True, default="4", help_text="Number shown in the floating hero badge.")
     hero_badge_label = models.CharField(max_length=100, null=True, blank=True, default="Strategic Focus Areas", help_text="Label shown under the hero badge number.")
+    problem_section_image = models.ImageField(upload_to="pictures", null=True, blank=True, help_text="Photo or map shown next to \"The Challenge\" section on the homepage (Malumfashi/Katsina panel). Leave blank to use the default abstract graphic.")
 
     # Strategic statements (one of each — from the Foundation's Strategic Plan)
     vision = models.TextField(null=True, blank=True)
