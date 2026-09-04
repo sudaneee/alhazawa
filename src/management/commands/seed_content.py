@@ -95,11 +95,8 @@ class Command(BaseCommand):
             "accountable governance, and community-centered partnerships."
         )
         g.future_centre_intro = (
-            "The Foundation's Strategic Plan proposes a purpose-built Centre — developed on "
-            "an identified site in Alhazawa — bringing education, skills training and "
-            "institutional coordination under one roof. This is a development vision, phased "
-            "in line with available resources and strategic priorities; it has not yet been "
-            "constructed."
+            "A purpose-built Centre on an identified site in Alhazawa, bringing education, "
+            "skills training and coordination under one roof — a phased vision, not yet built."
         )
         if not g.logo:
             g.logo.name = "pictures/alhazawa-logo-transparent.png"
@@ -127,7 +124,7 @@ class Command(BaseCommand):
     def seed_founder(self):
         founder, _ = FounderProfile.objects.get_or_create(pk=1)
         founder.name = "Prof. Mansir Dodo"
-        founder.role_title = "Founder & Visionary"
+        founder.role_title = "Founder"
         founder.bio = (
             "Welcome to Alhazawa Orphans and Girl Child Foundation.\n\n"
             "It is with a heart full of gratitude and hope that I welcome you to this space "

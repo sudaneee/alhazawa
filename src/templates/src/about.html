@@ -24,7 +24,6 @@
       <span class="role">{{ founder.role_title }}</span>
       <h2 id="founder-h">{{ founder.name }}</h2>
       <p class="bio">{{ founder.bio|linebreaksbr }}</p>
-      <p style="margin-top:.8rem;font-size:.95rem;color:var(--text-muted);">The Foundation is headquartered at {{ g_info.address }}.</p>
       {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
     </div>
   </div>
@@ -41,7 +40,6 @@
       <span class="eyebrow">Organizational Background</span>
       <h2 id="bg-h">A Foundation built for its community, by its community.</h2>
       <p style="margin-top:1.3rem;font-size:1.05rem;color:var(--text-muted);max-width:56ch;">{{ about.content }}</p>
-      <p style="margin-top:1.1rem;font-size:1.05rem;color:var(--text-muted);max-width:56ch;">A Strategic Plan provides the structured framework that guides the Foundation's growth, aligns activities with its mission, supports leadership decision-making, and communicates priorities and accountability to stakeholders and donors.</p>
     </div>
   </div>
 </section>

@@ -81,7 +81,7 @@
     <div class="founder-copy" data-reveal="right">
       <span class="role">{{ founder.role_title }}</span>
       <h2 id="founder-h">{{ founder.name }}</h2>
-      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
+      <p class="bio">{{ founder.bio|truncatewords:30 }}</p>
       {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
       <a href="{% url 'about' %}" class="btn btn-secondary" style="margin-top:1.8rem;">Read the Full Story</a>
     </div>
@@ -95,14 +95,14 @@
     <div class="problem-copy">
       <span class="eyebrow">The Challenge</span>
       <h2 id="problem-h" data-reveal="up">Millions of children are waiting for a chance.</h2>
-      <p class="lead" data-reveal="up" data-reveal-delay="100">Across underserved communities in Northern Nigeria, orphaned children and vulnerable girls face overlapping barriers to education, welfare and opportunity — barriers that compound each other, quietly, for years.</p>
+      <p class="lead" data-reveal="up" data-reveal-delay="100">Orphaned children and vulnerable girls in Northern Nigeria face barriers that compound, quietly, for years.</p>
       <ul class="problem-list" data-stagger>
-        <li data-reveal="left"><span class="bullet"></span><div><strong>Loss of parental care</strong><span class="note">Orphaned children often lose not just guardianship, but stability, advocacy and continuity of schooling.</span></div></li>
-        <li data-reveal="left"><span class="bullet"></span><div><strong>Poverty &amp; economic hardship</strong><span class="note">Basic needs compete directly with school fees, materials and time — and basic needs usually win.</span></div></li>
-        <li data-reveal="left"><span class="bullet"></span><div><strong>Barriers specific to the girl-child</strong><span class="note">Cultural expectations, early marriage risk and domestic responsibility disproportionately push girls out of the classroom.</span></div></li>
-        <li data-reveal="left"><span class="bullet"></span><div><strong>Insecurity &amp; lack of infrastructure</strong><span class="note">In communities with too few schools and too little protection, exclusion becomes the default, not the exception.</span></div></li>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Loss of parental care</strong><span class="note">Stability and continuity of schooling, gone with it.</span></div></li>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Poverty &amp; economic hardship</strong><span class="note">Basic needs win out over school fees.</span></div></li>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Barriers facing the girl-child</strong><span class="note">Early marriage risk pushes girls from the classroom.</span></div></li>
+        <li data-reveal="left"><span class="bullet"></span><div><strong>Insecurity &amp; lack of infrastructure</strong><span class="note">Too few schools, too little protection.</span></div></li>
       </ul>
-      <p class="context-note">Contextual information drawn from the Foundation's Strategic Plan.</p>
+      <p class="context-note">From the Foundation's Strategic Plan.</p>
     </div>
     <div class="map-panel{% if g_info.problem_section_image %} has-photo{% endif %}" data-reveal="scale">
       {% if g_info.problem_section_image %}
