@@ -220,8 +220,10 @@
       <h2 id="gallery-h">A photo story from Alhazawa.</h2>
       <p>Real photographs from the Foundation's programmes.</p>
     </div>
-    <div class="gallery-filters" data-render="gallery-filters"></div>
-    <div class="masonry" data-render="masonry"></div>
+    <div class="masonry" data-render="masonry" data-limit="10"></div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="{% url 'impact' %}" class="btn btn-secondary">View Full Gallery</a>
+    </div>
   </div>
 </section>
 

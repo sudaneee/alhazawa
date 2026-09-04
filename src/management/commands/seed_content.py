@@ -66,6 +66,7 @@ class Command(BaseCommand):
         self.seed_future_centre()
         self.seed_day_timeline()
         self.seed_gallery_categories_and_recategorize()
+        self.seed_new_photos_september()
         self.seed_donation_areas()
         self.seed_partner_categories()
         self.seed_inquiry_types()
@@ -355,6 +356,57 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING(f"Gallery video matching '{fragment}' not found — skipped."))
 
         self.stdout.write("Gallery categorized.")
+
+    # ------------------------------------------------------------------
+    def seed_new_photos_september(self):
+        """21 real photos added after the initial launch — more lesson
+        sessions, feeding, materials distribution, and one striking
+        portrait. Filenames already live in media/pictures/."""
+        cats = {c.name: c for c in GalleryCategory.objects.all()}
+
+        photos = [
+            ("new-lesson-mixed-mat.jpg", "Education", "wide", "Beneficiaries settle into a lesson, lap-desks and notebooks out."),
+            ("new-feeding-snack-1.jpg", "Feeding", "wide", "A shared snack break during a lesson session."),
+            ("new-lesson-lapdesks-1.jpg", "Education", "wide", "A full classroom of lap-desks, heads down and writing."),
+            ("new-lesson-closeup.jpg", "Education", "wide", "Beneficiaries focused on their lesson."),
+            ("new-community-group.jpg", "Community", "wide", "Foundation staff and volunteers pictured with beneficiaries."),
+            ("new-feeding-snack-2.jpg", "Feeding", "wide", "Bread and a drink — a feeding session in progress."),
+            ("new-lesson-lapdesks-2.jpg", "Education", "wide", "Beneficiaries at their lap-desks along the classroom wall."),
+            ("new-lesson-wideroom.jpg", "Education", "wide", "A lesson spans the length of the room."),
+            ("new-lesson-orangemat.jpg", "Education", "wide", "Beneficiaries write together on a woven mat."),
+            ("new-maths-lesson.jpg", "Learning Materials", "tall", "A mathematics lesson on open sentences, addition and subtraction."),
+            ("new-lesson-redtable-1.jpg", "Education", "wide", "A mixed-age group at lesson, mats and a shared table."),
+            ("new-lesson-redtable-2.jpg", "Education", "wide", "Beneficiaries writing at a shared table."),
+            ("new-lesson-lapdesks-3.jpg", "Education", "wide", "A classroom lesson in session, lap-desks along the wall."),
+            ("new-lesson-reading.jpg", "Education", "tall", "A beneficiary reads quietly during a lesson."),
+            ("new-lesson-redtable-3.jpg", "Education", "wide", "Beneficiaries at their books during a lesson session."),
+            ("new-materials-boards-1.jpg", "Learning Materials", "wide", "Beneficiaries proudly hold up their new writing boards."),
+            ("new-materials-boards-2.jpg", "Learning Materials", "wide", "New learning boards distributed to beneficiaries."),
+            ("new-community-waiting.jpg", "Community", "wide", "Younger beneficiaries gather before the day's session begins."),
+            ("new-lesson-tealmat-1.jpg", "Education", "wide", "Beneficiaries settle in for a lesson, shoes left at the mat's edge."),
+            ("new-lesson-tealmat-2.jpg", "Education", "wide", "A lesson in session on the woven mat."),
+            ("new-portrait-writingslate.jpg", "Education", "tall", "A beneficiary holds his Qur'anic writing slate — tradition and learning side by side."),
+        ]
+
+        start_order = Gallery.objects.count()
+        for i, (filename, cat_name, size_hint, caption) in enumerate(photos):
+            image_path = f"pictures/{filename}"
+            item, created = Gallery.objects.get_or_create(
+                image=image_path,
+                defaults={
+                    "category": cats.get(cat_name),
+                    "size_hint": size_hint,
+                    "caption": caption,
+                    "order": start_order + i,
+                },
+            )
+            if not created:
+                item.category = cats.get(cat_name)
+                item.size_hint = size_hint
+                item.caption = caption
+                item.save()
+
+        self.stdout.write(f"{len(photos)} new photos seeded into the gallery.")
 
     # ------------------------------------------------------------------
     def seed_donation_areas(self):

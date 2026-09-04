@@ -797,6 +797,24 @@ h1, h2, h3, h4 {
 .gallery-filters button:hover { border-color: var(--royal-500); color: var(--royal-700); }
 .gallery-filters button.is-active { background: var(--grad-brand); border-color: transparent; color: #fff; }
 
+.gallery-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem; margin-top: 2.5rem; }
+.pager-btn {
+  min-width: 40px; height: 40px;
+  padding: 0 .6rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-soft);
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--ink-600);
+  background: var(--white);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all var(--dur-fast);
+}
+.pager-btn svg { width: 16px; height: 16px; stroke: currentColor; }
+.pager-btn:hover:not(:disabled) { border-color: var(--royal-500); color: var(--royal-700); }
+.pager-btn.is-active { background: var(--grad-brand); border-color: transparent; color: #fff; }
+.pager-btn:disabled { opacity: .35; cursor: default; }
+
 .masonry {
   columns: 3 240px;
   column-gap: 1.1rem;
