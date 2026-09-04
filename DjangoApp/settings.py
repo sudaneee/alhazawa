@@ -122,8 +122,23 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Static files are served directly by nginx (see /etc/nginx/sites-enabled/alhazawa),
-# not through Django/whitenoise, so the default storage backend is all that's
-# needed here — no extra dependency required.
+# not through Django/whitenoise. ManifestStaticFilesStorage is core Django (no
+# extra dependency) — it appends a content hash to every static filename on
+# collectstatic, so every deploy gets a brand-new URL and browsers can never
+# serve a stale cached CSS/JS file after a change.
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        # Only in production — runserver's live dev-serving doesn't play
+        # well with the manifest, so keep plain storage locally.
+        'BACKEND': (
+            'django.contrib.staticfiles.storage.StaticFilesStorage' if DEBUG
+            else 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+        ),
+    },
+}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -81,7 +81,7 @@
     <div class="founder-copy" data-reveal="right">
       <span class="role">{{ founder.role_title }}</span>
       <h2 id="founder-h">{{ founder.name }}</h2>
-      <p class="bio">{{ founder.bio|truncatewords:30 }}</p>
+      <p class="bio">{{ founder.bio|linebreaksbr }}</p>
       {% if founder.quote %}<p class="sig">{{ founder.quote }}</p>{% endif %}
       <a href="{% url 'about' %}" class="btn btn-secondary" style="margin-top:1.8rem;">Read the Full Story</a>
     </div>
