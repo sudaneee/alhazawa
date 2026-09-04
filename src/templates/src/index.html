@@ -1,6 +1,6 @@
 {% extends "src/base.html" %}
 {% load static %}
-{% block title %}{{ g_info.org_name }} | Building Futures, Restoring Dignity{% endblock %}
+{% block title %}{{ g_info.org_name }} | Restoring Dignity, Building Futures{% endblock %}
 {% block description %}{{ g_info.org_name }} is a community-based nonprofit in Malumfashi, Northern Nigeria, providing education, welfare and empowerment for orphans and vulnerable girls.{% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow">{{ g_info.org_name }}</span>
-      <h1 data-reveal="up">Building Futures.<br>Restoring <em>Dignity.</em></h1>
+      <h1 data-reveal="up">Restoring <em>Dignity,</em><br>Building Futures,<br><span class="hero-subline">One Orphan and Vulnerable Girl at a Time</span></h1>
       <p class="lead" data-reveal="up" data-reveal-delay="120">Creating pathways to education, care, empowerment and self-reliance for orphans and vulnerable girls across underserved communities of Northern Nigeria.</p>
       <div class="hero-actions" data-reveal="up" data-reveal-delay="220">
         <a href="{% url 'donate' %}" class="btn btn-primary">Support Our Mission</a>
